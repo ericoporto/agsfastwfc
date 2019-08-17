@@ -176,6 +176,7 @@
     <ClInclude Include="fastwfc\include\utils\array3D.hpp" />
     <ClInclude Include="fastwfc\include\wave.hpp" />
     <ClInclude Include="fastwfc\include\wfc.hpp" />
+    <ClInclude Include="..\ags\Common\core\platform.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
