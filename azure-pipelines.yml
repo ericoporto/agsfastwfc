@@ -16,7 +16,7 @@ strategy:
     mac:
       imageName: 'macos-10.13'
     windows:
-      imageName: 'windows-2019'
+      imageName: 'vs2017-win2016'
 
 pool:
   vmImage: $(imageName)
@@ -86,7 +86,9 @@ steps:
     pushd ags
     git checkout release-3.5.0
     popd
+    ls
     popd
+    ls
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
   displayName: 'prepareTask'
 
