@@ -92,7 +92,7 @@ steps:
     echo "ls"
     ls
     echo "pwd"
-    pdw    
+    pwd    
     echo "ls ../ags/Common/core/"
     ls ../ags/Common/core/
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
