@@ -48,7 +48,7 @@
     <ClInclude Include="fastwfc\include\utils\array3D.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\ags\Common\core\platform.h">
+    <ClInclude Include="$(SolutionDir)\..\ags\Common\core\platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
