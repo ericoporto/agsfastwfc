@@ -24,6 +24,10 @@ pool:
 steps:
 # Linux
 - bash: |
+    pushd ..
+    git clone https://github.com/adventuregamestudio/ags.git
+    git checkout release-3.5.0
+    popd
     pushd agsfastwfc
     make
     popd
@@ -39,6 +43,10 @@ steps:
 
 # macOS
 - bash: |
+    pushd ..
+    git clone https://github.com/adventuregamestudio/ags.git
+    git checkout release-3.5.0
+    popd
     pushd agsfastwfc
     make
     popd
@@ -53,6 +61,14 @@ steps:
     targetFolder: $(Build.ArtifactStagingDirectory)
 
 # Windows
+- bash: |
+    pushd ..
+    git clone https://github.com/adventuregamestudio/ags.git
+    git checkout release-3.5.0
+    popd
+  condition: eq( variables['Agent.OS'], 'Windows_NT' )
+  displayName: 'prepareTask'
+
 - task: VSBuild@1
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
   inputs:
