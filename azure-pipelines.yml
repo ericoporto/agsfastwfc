@@ -57,7 +57,7 @@ steps:
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
   inputs:
     solution: 'agsfastwfc.sln'
-    platform: win32
+    platform: x86
     configuration: Release
 
 - task: CopyFiles@2
