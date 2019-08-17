@@ -86,9 +86,15 @@ steps:
     pushd ags
     git checkout release-3.5.0
     popd
+    echo "ls"
     ls
     popd
+    echo "ls"
     ls
+    echo "pwd"
+    pdw    
+    echo "ls ../ags/Common/core/"
+    ls ../ags/Common/core/
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
   displayName: 'prepareTask'
 
