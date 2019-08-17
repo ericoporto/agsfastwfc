@@ -2,8 +2,8 @@ UNAME := $(shell uname)
 
 INCDIR = ../../ags/Engine ../../ags/Common ./fastwfc/include
 LIBDIR = ./fastwfc/lib
-CC = gcc
-CXX = g++
+CC = gcc-8
+CXX = g++-8
 CFLAGS = -fPIC -fvisibility=hidden -O2 -g -Wall -std=c++17
 LIBS = -lm -lstdc++ 
 
