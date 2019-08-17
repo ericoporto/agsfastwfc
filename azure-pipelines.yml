@@ -40,7 +40,7 @@ steps:
     pushd agsfastwfc
     pushd fastwfc
     cmake .
-    make install
+    sudo make install
     popd
     make
     popd
