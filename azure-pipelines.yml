@@ -26,7 +26,9 @@ steps:
 - bash: |
     pushd ..
     git clone https://github.com/adventuregamestudio/ags.git
+    pushd ags
     git checkout release-3.5.0
+    popd
     popd
     pushd agsfastwfc
     make
@@ -45,7 +47,9 @@ steps:
 - bash: |
     pushd ..
     git clone https://github.com/adventuregamestudio/ags.git
+    pushd ags
     git checkout release-3.5.0
+    popd
     popd
     pushd agsfastwfc
     make
