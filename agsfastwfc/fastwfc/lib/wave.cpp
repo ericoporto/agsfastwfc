@@ -1,4 +1,4 @@
-#include "wave.hpp"
+#include "../include/wave.hpp"
 
 #include <limits>
 #include <algorithm>
