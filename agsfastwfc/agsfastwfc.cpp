@@ -193,7 +193,7 @@ void write_image_sprite_buffer(unsigned int** destlongbuffer, const Array2D<Colo
 			//int locale = xytolocale(j, i, m.width);
 			Color pixel = m.get(i, j);
 
-			destlongbuffer[i][j] = makeacol32(pixel.r, pixel.g, pixel.b, 0);
+                        destlongbuffer[i][j] = makeacol32(pixel.r, pixel.g, pixel.b, 255); //ags alpha 0 -> plugin alpha 255
 		}
 	}
 }
