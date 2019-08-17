@@ -24,6 +24,10 @@ pool:
 steps:
 # Linux
 - bash: |
+    sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+    sudo apt-get update
+    sudo apt-get install gcc-8 g++-8
+    gcc-8 --version
     pushd ..
     git clone https://github.com/adventuregamestudio/ags.git
     pushd ags
