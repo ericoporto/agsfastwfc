@@ -68,7 +68,9 @@ steps:
 - bash: |
     pushd ..
     git clone https://github.com/adventuregamestudio/ags.git
+    pushd ags
     git checkout release-3.5.0
+    popd
     popd
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
   displayName: 'prepareTask'
