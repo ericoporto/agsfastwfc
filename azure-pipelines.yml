@@ -31,6 +31,10 @@ steps:
     popd
     popd
     pushd agsfastwfc
+    pushd fastwfc
+    cmake .
+    make install
+    popd
     make
     popd
   condition: eq( variables['Agent.OS'], 'Linux' )
@@ -52,6 +56,10 @@ steps:
     popd
     popd
     pushd agsfastwfc
+    pushd fastwfc
+    cmake .
+    make install
+    popd
     make
     popd
   condition: eq( variables['Agent.OS'], 'Darwin' )

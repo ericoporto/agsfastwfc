@@ -1,4 +1,4 @@
-#include "../include/wfc.hpp"
+#include "wfc.hpp"
 #include <limits>
 
 namespace {
