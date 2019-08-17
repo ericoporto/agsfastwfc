@@ -1,16 +1,5 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 
-/***********************************************************
-* agsfastwfc                                                *
-*                                                         *
-* Author: Steven Poulton                                  *
-*                                                         *
-* Date: 09/01/2011                                        *
-*                                                         *
-* Description: An AGS Plugin to allow true Alpha Blending *
-*                                                         *
-***********************************************************/
-
 #pragma region Defines_and_Includes
 
 #include "core/platform.h"
@@ -198,6 +187,17 @@ int Clamp(int val, int min, int max){
         else return val;
 }
 
+void write_image_sprite_buffer(unsigned int** destlongbuffer, const Array2D<Color>& m) noexcept {
+	for (unsigned i = 0; i < (unsigned)m.height; i++) {
+		for (unsigned j = 0; j < (unsigned)m.width; j++) {
+			//int locale = xytolocale(j, i, m.width);
+			Color pixel = m.get(i, j);
+
+			destlongbuffer[i][j] = makeacol32(pixel.r, pixel.g, pixel.b, 0);
+		}
+	}
+}
+
 using namespace std;
 int wfcOverlap(int destination, int sprite, int seed, bool periodic_input, bool periodic_output, int symmetry, int ground, int N){
 
@@ -234,7 +234,12 @@ int wfcOverlap(int destination, int sprite, int seed, bool periodic_input, bool 
         std::optional<Array2D<Color> > success = wfc.run();
         if (success.has_value()) {
                 //write_image_png("results/" + name + to_string(i) + ".png", *success);
-                cout << " finished!" << endl;
+
+			cout << " success!" << endl;
+
+			write_image_sprite_buffer(destlongbuffer, *success);
+
+            cout << " finished!" << endl;
         } else {
                 cout << "failed!" << endl;
         }
