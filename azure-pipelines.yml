@@ -37,7 +37,7 @@ steps:
 - task: CopyFiles@2
   condition: eq( variables['Agent.OS'], 'Linux' )
   inputs:
-    sourceFolder: '$(Build.SourcesDirectory)'
+    sourceFolder: '$(Build.SourcesDirectory)/agsfastwfc'
     contents: 'libagsfastwfc.so'
     targetFolder: $(Build.ArtifactStagingDirectory)
 
@@ -56,7 +56,7 @@ steps:
 - task: CopyFiles@2
   condition: eq( variables['Agent.OS'], 'Darwin' )
   inputs:
-    sourceFolder: '$(Build.SourcesDirectory)'
+    sourceFolder: '$(Build.SourcesDirectory)/agsfastwfc'
     contents: 'libagsfastwfc.dylib'
     targetFolder: $(Build.ArtifactStagingDirectory)
 
