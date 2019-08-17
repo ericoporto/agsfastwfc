@@ -232,6 +232,7 @@ int wfcOverlap(int destination, int sprite, int seed, bool periodic_input, bool 
 
         OverlappingWFC<Color> wfc( m, options, seed);
         std::optional<Array2D<Color> > success = wfc.run();
+		bool isSuccess = false;
         if (success.has_value()) {
                 //write_image_png("results/" + name + to_string(i) + ".png", *success);
 
@@ -240,6 +241,7 @@ int wfcOverlap(int destination, int sprite, int seed, bool periodic_input, bool 
 			write_image_sprite_buffer(destlongbuffer, *success);
 
             cout << " finished!" << endl;
+			isSuccess = true;
         } else {
                 cout << "failed!" << endl;
         }
@@ -247,7 +249,7 @@ int wfcOverlap(int destination, int sprite, int seed, bool periodic_input, bool 
         engine->ReleaseBitmapSurface(src);
         engine->ReleaseBitmapSurface(dest);
         engine->NotifySpriteUpdated(destination);
-        return destination;
+        return isSuccess;
 
 }
 
