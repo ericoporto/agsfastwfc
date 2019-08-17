@@ -1,3 +1,5 @@
+// dllmain.cpp : Defines the entry point for the DLL application.
+
 /***********************************************************
 * agsfastwfc                                                *
 *                                                         *
@@ -32,14 +34,14 @@
 
 #include "plugin/agsplugin.h"
 
-#include "fastwfc/utils/array2D.hpp"
-#include "fastwfc/include/color.hpp"
-#include "fastwfc/include/overlapping_wfc.hpp"
-#include "fastwfc/include/wfc.hpp"
+#include "./fastwfc/include/utils/array2D.hpp"
+#include "./fastwfc/include/color.hpp"
+#include "./fastwfc/include/overlapping_wfc.hpp"
+#include "./fastwfc/include/wfc.hpp"
 
-#include "fastwfc/lib/wave.cpp"
-#include "fastwfc/lib/propagator.cpp"
-#include "fastwfc/lib/wfc.cpp"
+// #include "./fastwfc/lib/wave.cpp"
+// #include "./fastwfc/lib/propagator.cpp"
+// #include "./fastwfc/lib/wfc.cpp"
 
 #if defined(BUILTIN_PLUGINS)
 namespace agsfastwfc {
@@ -224,11 +226,11 @@ int wfcOverlap(int destination, int sprite, int seed, bool periodic_input, bool 
             srcr =  getr32(srclongbuffer[i][j]);
             srcg =  getg32(srclongbuffer[i][j]);
             srcb =  getb32(srclongbuffer[i][j]);
-            m.data[i * srcWidth + j] = {srcr, srcg, srcb};
+            m.data[i * srcWidth + j] = { (unsigned char) srcr, (unsigned char) srcg, (unsigned char) srcb};
           }
         }
 
-        // OverlappingWFC<Color> wfc(*m, options, seed);
+        OverlappingWFC<Color> wfc( m, options, seed);
         std::optional<Array2D<Color> > success = wfc.run();
         if (success.has_value()) {
                 //write_image_png("results/" + name + to_string(i) + ".png", *success);
