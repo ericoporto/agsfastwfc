@@ -11,7 +11,12 @@
  * The distinct symmetries of a tile.
  * It represents how the tile behave when it is rotated or reflected
  */
-enum class Symmetry { X, T, I, L, backslash, P };
+enum class Symmetry { X=0, 
+					  T=1,
+	                  I=2, 
+	                  L=3, 
+	                  backslash=4, 
+	                  P=5 };
 
 /**
  * Return the number of possible distinct orientations for a tile.

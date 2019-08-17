@@ -199,7 +199,7 @@ void write_image_sprite_buffer(unsigned int** destlongbuffer, const Array2D<Colo
 }
 
 using namespace std;
-int wfcOverlap(int destination, int sprite, int seed, bool periodic_input, bool periodic_output, int symmetry, int ground, int N){
+int AgsFastWFC_Overlapping(int destination, int sprite, int seed, bool periodic_input, bool periodic_output, int N, int ground){
 
         int srcWidth, srcHeight, destWidth, destHeight;
 
@@ -216,7 +216,7 @@ int wfcOverlap(int destination, int sprite, int seed, bool periodic_input, bool 
         unsigned int **destlongbuffer = (unsigned int**)destcharbuffer;
 
         OverlappingWFCOptions options = {
-                periodic_input, periodic_output, destHeight, destWidth, symmetry, ground, N
+                periodic_input, periodic_output, destHeight, destWidth, 8 /*no symmetry*/, ground, N
         };
 
         Array2D<Color> m = Array2D<Color>(srcHeight, srcWidth);
@@ -250,7 +250,6 @@ int wfcOverlap(int destination, int sprite, int seed, bool periodic_input, bool 
         engine->ReleaseBitmapSurface(dest);
         engine->NotifySpriteUpdated(destination);
         return isSuccess;
-
 }
 
 
@@ -264,7 +263,19 @@ int wfcOverlap(int destination, int sprite, int seed, bool periodic_input, bool 
 IAGSEditor *editor; // Editor interface
 
 const char *ourScriptHeader =
-        "import int wfcOverlap(int destination, int sprite, int seed, bool periodic_input, bool periodic_output, int symmetry, int ground, int N);";
+    "enum TypeSymmetry { \r\n"
+	"  eSymmetryX=0, \r\n"
+	"  eSymmetryT=1, \r\n"
+	"  eSymmetryI=2, \r\n"
+	"  eSymmetryL=3, \r\n"
+	"  eSymmetryBackslash=4, \r\n"
+	"  eSymmetryP=5, \r\n"
+	"  eSymmetryNone=8, \r\n"
+	"}; \r\n"
+    "  \r\n"
+    "struct AgsFastWFC { \r\n"
+	"  import static bool Overlapping(int destination, int sprite, int seed, bool periodic_input, bool periodic_output, int N=3, int ground=0); \r\n"
+	"}; \r\n";
 
 
 //------------------------------------------------------------------------------
@@ -355,7 +366,7 @@ void AGS_EngineStartup(IAGSEngine *lpEngine)
 
         //register functions
 
-        REGISTER(wfcOverlap)
+		engine->RegisterScriptFunction("AgsFastWFC::Overlapping^7", (void*)AgsFastWFC_Overlapping);
 
 }
 
