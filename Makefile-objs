@@ -1,0 +1,1 @@
+OBJS = fastwfc/lib/wfc.o fastwfc/lib/wave.o fastwfc/lib/propagator.o agsfastwfc.o
