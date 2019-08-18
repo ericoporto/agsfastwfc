@@ -188,14 +188,14 @@ int Clamp(int val, int min, int max){
 }
 
 void write_image_sprite_buffer(unsigned int** destlongbuffer, const Array2D<Color>& m) noexcept {
-	for (unsigned i = 0; i < (unsigned)m.height; i++) {
-		for (unsigned j = 0; j < (unsigned)m.width; j++) {
-			//int locale = xytolocale(j, i, m.width);
-			Color pixel = m.get(i, j);
+        for (unsigned i = 0; i < (unsigned)m.height; i++) {
+                for (unsigned j = 0; j < (unsigned)m.width; j++) {
+                        //int locale = xytolocale(j, i, m.width);
+                        Color pixel = m.get(i, j);
 
                         destlongbuffer[i][j] = makeacol32(pixel.r, pixel.g, pixel.b, 255); //ags alpha 0 -> plugin alpha 255
-		}
-	}
+                }
+        }
 }
 
 using namespace std;
@@ -221,27 +221,27 @@ int AgsFastWFC_Overlapping(int destination, int sprite, int seed, bool periodic_
 
         Array2D<Color> m = Array2D<Color>(srcHeight, srcWidth);
         for(unsigned i = 0; i < (unsigned)srcHeight; i++) {
-          for(unsigned j = 0; j < (unsigned)srcWidth; j++) {
-            int srcr, srcg, srcb;
-            srcr =  getr32(srclongbuffer[i][j]);
-            srcg =  getg32(srclongbuffer[i][j]);
-            srcb =  getb32(srclongbuffer[i][j]);
-            m.data[i * srcWidth + j] = { (unsigned char) srcr, (unsigned char) srcg, (unsigned char) srcb};
-          }
+                for(unsigned j = 0; j < (unsigned)srcWidth; j++) {
+                        int srcr, srcg, srcb;
+                        srcr =  getr32(srclongbuffer[i][j]);
+                        srcg =  getg32(srclongbuffer[i][j]);
+                        srcb =  getb32(srclongbuffer[i][j]);
+                        m.data[i * srcWidth + j] = { (unsigned char) srcr, (unsigned char) srcg, (unsigned char) srcb};
+                }
         }
 
         OverlappingWFC<Color> wfc( m, options, seed);
         std::optional<Array2D<Color> > success = wfc.run();
-		bool isSuccess = false;
+        bool isSuccess = false;
         if (success.has_value()) {
                 //write_image_png("results/" + name + to_string(i) + ".png", *success);
 
-			cout << " success!" << endl;
+                cout << " success!" << endl;
 
-			write_image_sprite_buffer(destlongbuffer, *success);
+                write_image_sprite_buffer(destlongbuffer, *success);
 
-            cout << " finished!" << endl;
-			isSuccess = true;
+                cout << " finished!" << endl;
+                isSuccess = true;
         } else {
                 cout << "failed!" << endl;
         }
@@ -263,19 +263,19 @@ int AgsFastWFC_Overlapping(int destination, int sprite, int seed, bool periodic_
 IAGSEditor *editor; // Editor interface
 
 const char *ourScriptHeader =
-    "enum TypeSymmetry { \r\n"
-	"  eSymmetryX=0, \r\n"
-	"  eSymmetryT=1, \r\n"
-	"  eSymmetryI=2, \r\n"
-	"  eSymmetryL=3, \r\n"
-	"  eSymmetryBackslash=4, \r\n"
-	"  eSymmetryP=5, \r\n"
-	"  eSymmetryNone=8, \r\n"
-	"}; \r\n"
-    "  \r\n"
-    "struct AgsFastWFC { \r\n"
-	"  import static bool Overlapping(int destination, int sprite, int seed, bool periodic_input, bool periodic_output, int N=3, int ground=0); \r\n"
-	"}; \r\n";
+        "enum TypeSymmetry { \r\n"
+        "  eSymmetryX=0, \r\n"
+        "  eSymmetryT=1, \r\n"
+        "  eSymmetryI=2, \r\n"
+        "  eSymmetryL=3, \r\n"
+        "  eSymmetryBackslash=4, \r\n"
+        "  eSymmetryP=5, \r\n"
+        "  eSymmetryNone=8, \r\n"
+        "}; \r\n"
+        "  \r\n"
+        "struct AgsFastWFC { \r\n"
+        "  import static bool Overlapping(int destination, int sprite, int seed, bool periodic_input, bool periodic_output, int N=3, int ground=0); \r\n"
+        "}; \r\n";
 
 
 //------------------------------------------------------------------------------
@@ -366,7 +366,7 @@ void AGS_EngineStartup(IAGSEngine *lpEngine)
 
         //register functions
 
-		engine->RegisterScriptFunction("AgsFastWFC::Overlapping^7", (void*)AgsFastWFC_Overlapping);
+        engine->RegisterScriptFunction("AgsFastWFC::Overlapping^7", (void*)AgsFastWFC_Overlapping);
 
 }
 
