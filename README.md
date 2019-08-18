@@ -10,6 +10,39 @@ Using the [fast-wfc library code](https://github.com/math-fehr/fast-wfc) from Ma
 
 I just made a simple interface with Adventure Game Studio.
 
+## agsfastwfc Script API usage
+
+agsfastwfc can generate sprites that are locally similar to the input bitmap.
+
+### Overlapping
+
+
+```
+bool AgsFastWFC.Overlapping(
+                   int destination, int sprite, 
+				   int seed, 
+				   bool periodic_input, bool periodic_output, 
+				   int N=3, int ground=0)
+```
+- **`int destination`** The Graphic property of a Dynamic Sprite you have created to draw the result.
+- **`int sprite`** The source sprite you want to feed FastWFC Overlapping algorithm.
+- **`int seed`** An integer number, will provide the randomness of the output. 
+- **`bool periodic_input`** Should be true if the input is periodic.
+- **`bool periodic_output`** Should be true if the desired output is periodic.
+- **`int N`** A NxN pattern of pixels in the output should occur at least once in the input. Default is 3x3 pixels.
+- **`int ground`** Default is 0.
+
+Example:
+
+```
+  dynspr_dest = DynamicSprite.Create(60, 120, true);  
+  int result = AgsFastWFC.Overlapping(
+					dynspr_dest.Graphic, obj_source.Graphic, 
+					Random(100000), 
+					true, true, 3,  0);
+  obj_destination.Graphic = dynspr_dest.Graphic;
+```
+
 ## Building agsfastwfc plugin
 
 first you need to clone this repository to the folder you clone your repos (ex: ~/git). 
